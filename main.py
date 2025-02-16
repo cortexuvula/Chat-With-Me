@@ -29,11 +29,12 @@ if 'chat_input' not in st.session_state:
 header = st.container()
 body = st.container()
 user_input = st.container()
-user_input.float("bottom: 0; position: fixed; width: 100%; padding: 20px;")  # added padding to user_input
+user_input.float("bottom: 0; position: fixed; padding: 20px; background-color: rgba(0, 0, 0, 1); ")  # added padding to user_input
 
 
 # Callback function for Send button
 def send_message():
+    
     if st.session_state.chat_input:
         webhook_url = HOST  # use HOST from .env
         payload = {"chatInput": st.session_state.chat_input, "sessionID": st.session_state['sessionID']}
@@ -46,7 +47,8 @@ def send_message():
         except Exception as e:
             reply = f"Request failed: {e}"
         st.session_state['messages'].append({"user": st.session_state.chat_input, "bot": reply})
-        st.session_state.chat_input = ""  # clear the input
+        st.session_state.chat_input = ""  # clear the input field
+        
 
 # Callback function for New Session button
 def new_session():
@@ -59,12 +61,23 @@ with header:
 
 with body:
     for msg in st.session_state['messages']:
-        st.write(f"User: {msg['user']}")
-        st.write(f"Bot: {msg['bot']}")
+        st.write(f"Question: {msg['user']}")
+        st.write(f"Answer: {msg['bot']}")
 
 with user_input:
+    st.markdown(
+        """
+        <style>
+        div[data-testid="stTextInput"] > div {
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        </style>
+        """, unsafe_allow_html=True
+    )
     
-    st.text_input("Enter your message:", key="chat_input")
+    st.text_input("Enter your message:", key="chat_input", on_change=send_message)
     
     col1, col2 = st.columns(2)
     with col1:
