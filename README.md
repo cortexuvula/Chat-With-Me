@@ -27,12 +27,13 @@ This project is a simple chat interface built with Streamlit that interacts with
 3. **Run the Application:**
 
    ```bash
-   streamlit run main.py
+   streamlit run Chat.py
    ```
 
 ## File Overview
 
-- **main.py**: Main application code which defines the chat interface.
+- **Chat.py**: Main application code which defines the chat interface.
+- **Settings.py**: Change HOST, USER and PASSWORD 
 - **.env**: Contains environment variables (keep this file secure).
 - **env.example**: Example file for environment variables.
 - **requirements.txt**: List of dependencies.
