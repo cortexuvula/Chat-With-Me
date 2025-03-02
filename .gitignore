@@ -171,3 +171,4 @@ cython_debug/
 .pypirc
 
 .env
+app_launcher.py

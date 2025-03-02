@@ -6,10 +6,13 @@ import uuid
 import os
 from dotenv import load_dotenv
 
+
 logging.basicConfig(level=logging.DEBUG)  # enable debug logging
 
 # Load environment variables and initialize float layout
-load_dotenv() 
+# Load the .env file from the path specified in the environment variable
+dotenv_path = os.environ.get("DOTENV_PATH", ".env")
+load_dotenv(dotenv_path)
 float_init()  
 
 # Retrieve and clean environment variables (remove surrounding quotes)
