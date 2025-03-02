@@ -13,11 +13,11 @@ load_dotenv()
 float_init()  
 
 # Retrieve and clean environment variables (remove surrounding quotes)
-# Initialize chat history, sessionID, and chat input state
+# Initialize chat history, sessionId, and chat input state
 if 'messages' not in st.session_state:
     st.session_state['messages'] = []
-if 'sessionID' not in st.session_state:
-    st.session_state['sessionID'] = str(uuid.uuid4())
+if 'sessionId' not in st.session_state:
+    st.session_state['sessionId'] = str(uuid.uuid4())
 if 'chat_input' not in st.session_state:
     st.session_state['chat_input'] = ""
 
@@ -38,7 +38,7 @@ def send_message():
     
     if st.session_state.chat_input:
         webhook_url = HOST  # use HOST from .env
-        payload = {"chatInput": st.session_state.chat_input, "sessionID": st.session_state['sessionID']}
+        payload = {"chatInput": st.session_state.chat_input, "sessionId": st.session_state['sessionId']}
         try:
             response = requests.post(webhook_url, json=payload, auth=(USER, PASSWORD))  # use env variables
             if response.status_code == 200:
@@ -53,7 +53,7 @@ def send_message():
 
 # Callback function for New Session button
 def new_session():
-    st.session_state['sessionID'] = str(uuid.uuid4())
+    st.session_state['sessionId'] = str(uuid.uuid4())
     st.session_state['messages'] = []
 
 # Layout Containers: header, body (chat history), input
